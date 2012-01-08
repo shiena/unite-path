@@ -9,6 +9,7 @@ endfunction
 let s:source = {
     \ 'name' : 'path',
     \ 'description' : 'path',
+    \ 'default_action' : {'cdable' : 'cd'},
     \}
 
 call unite#define_source(s:source)
@@ -19,7 +20,8 @@ function! s:source.gather_candidates(args, context)"{{{
     return map(split(l:path, l:separator), '{
         \ "word" : v:val,
         \ "source" : "path",
-        \ "kind" : "directory",
+        \ "kind" : "cdable",
+        \ "action__directory" : v:val,
         \ }')
 endfunction"}}}
 
